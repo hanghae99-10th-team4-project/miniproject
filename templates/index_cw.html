@@ -13,23 +13,56 @@
 
     <title>나만의 산책길</title>
     <style>
-        .mytitle {
-            width: 100%;
-            height: 250px;
-            background-image: url("https://www.urbanbrush.net/web/wp-content/uploads/edd/2022/04/urbanbrush-20220419084012183252.jpg");
-            background-size:auto;
-            background-position: center;
-            margin: auto;
+        * {
+            font-family: 'Do Hyeon', sans-serif;
+        }
 
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        header {
+            width: 100%;
+            height: 500px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://img.freepik.com/premium-vector/people-walk-in-springtime-park-flat-color-illustration_151150-5198.jpg?w=1060');
+            background-position: center 30%;
+            background-size: cover;
+
+            color: white;
+        }
+
+        nav {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        nav > p {
+            width: 15%;
+            display: block;
+            text-align: center;
+            padding-top: 0.5%;
+
+        }
+
+        .logout:hover{
+            color:#bab9b9;
+        }
+
+        .cover{
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+
+            margin-top:200px;
         }
 
 
         .form-background {
-            background-color: cadetblue;
+            background-color: floralwhite;
             border-radius: 10px;
             border: none;
             padding: 300px;
@@ -44,6 +77,17 @@
             padding: 300px;
             width: 100%;
             margin: auto;
+        }
+
+        .form-input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 15px;
+            font-size: 13px;
+            border: 1px solid #d3dce6;
+            transition: border-color 200ms ease-in-out;
         }
 
         .title-input {
@@ -64,7 +108,7 @@
         }
 
 
-        .image_input {
+        .image-input {
             border: none;
             border-radius: 10px;
             padding: 7px;
@@ -96,47 +140,58 @@
 
      <script>
 
-         function hey() {
+         function save_comment() {
 
             $.ajax({
                 type: "POST",
                 url: "/api/walk",
-                data: {'name_give':name, 'comment_give':comment},
+                data: {'title_give':$('#title').val(), 'review_give':$('#review').val(), 'image_give':$('#image').val(), 'category_give':$('#category').val()},
                 success: function (response) {
                     alert(response["msg"])
                     window.location.reload()
                 }
-            });
+            })
         }
     </script>
 
 
-
 </head>
 <body>
-    <div class="mytitle" id="">
-        <h1>나만의 산책길</h1>
+    <header>
+        <nav>
+            <p class="home"><a href="/api/main">WALK</a></p>
+            <p class="logout" onclick="logout()"><span id="userId">ID</span> LOGOUT</p>
+        </nav>
+        <div class="cover">
+            <h1>동네길</h1>
+            <h6> 나만의 동네산책길을 공유하세요</h6>
+        </div>
+    </header>
 
     </div>
-    <div class="form-background" id="title">
-        <form class="image_input">
-            <input class="title-input" placeholder="나만의 길">
-            <input class="review-input" placeholder="내용">
-            <div class="mb-3">
-                <label for="image_input" class="form-label">이미지 첨부</label>
-                <input class="form-control" type="file" id="formFileMultiple" multiple>
-            </div>
+    <div class="form-background">
+        <form class="form-input">
+            <input class="title-input" placeholder="나만의 길" id="title">
+            <input class="review-input" placeholder="내용" id="review">
+<!--            <textarea placeholder="내용"></textarea>--><!--textarea
+                <div class="mb-3" >-->
+<!--                <label for="image" class="image-input" id="image">이미지 첨부</label>-->
+<!--                <input class="form-control" type="file" id="image" multiple>-->
+<!--            </div>-->
+            <input type="file" class="image-input" accept="jpg, jpeg, png" id="image"/>
         <div>
-            <select class="category_input" id="category" aria-label="Default select example">
-                <option selected>카테고리</option>
-                <option value="walk">도보</option>
-                <option value="bike">자전거</option>
-                <option value="car">자동차</option>
-                <option value="motorcycle">바이크</option>
-            </select>
+            <input class="category_input" id="category" placeholder="카테고리">
         </div>
             <button onclick="save_comment()" type="button" class="posting_input">완료</button>
         </form>
     </div>
+<footer class="bg-light text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.1);">
+    © 2022 Group4 진우,승열,채운,수민
+    <a class="text-dark" href="https://hanghae99.spartacodingclub.kr/">hanghae99</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 </body>
 </html>
