@@ -23,6 +23,9 @@
             color:white;
             text-decoration: none;
         }
+        a:hover{
+            color: #bab9b9;
+        }
         header{
             width: 100%;
             height: 500px;
@@ -46,13 +49,26 @@
             padding-top:0.5%;
 
         }
+        .logout:hover{
+            color:#bab9b9;
+        }
         .cover{
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
 
             margin-top:200px;
+        }
+        h1{
+            font-size:5rem;
+        }
+        h6{
+            font-size:1.5rem;
+
+            margin-top: 80px;
+
+            width:100%;
+            text-align:center;
         }
         .button{
             display: flex;
@@ -61,16 +77,9 @@
             justify-content: center;
         }
         .mycards {
-            margin: 20px auto 0px auto;
+            margin: 20px auto 50px auto;
             width: 100%;
             max-width: 1200px;
-        }
-        h1{
-            font-size:5rem;
-        }
-        h6{
-            font-size:1.5rem;
-            margin-top: 20px;
         }
     </style>
     <script>
@@ -92,7 +101,6 @@
                 }
             })
         }
-
         function show_walk() {
             $.ajax({
                 type: 'GET',
@@ -142,8 +150,8 @@
         <p class="logout"  onclick="logout()">LOGOUT</p>
     </nav>
     <div class="cover">
-        <h1 >동네길</h1>
-        <h6> 나만의 동네산책길을 공유하세요</h6>
+        <h1><a href="/api/main">동네길</a></h1>
+        <h6>나만의 동네산책길을 공유하세요</h6>
     </div>
 </header>
 <div class="button">
@@ -165,7 +173,7 @@
         </div>
         <div class="col" onclick="show_review()">
             <div class="card h-100">
-                <img src="https://www.busan.com/nas/data/content/image/2002/12/12/20021212000172_0.jpg"
+                <img src="https://img.gqkorea.co.kr/gq/2022/05/style_6295b5eae091b.jpg"
                      class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">채운길</h5>
@@ -175,7 +183,7 @@
         </div>
         <div class="col" onclick="show_review()">
             <div class="card h-100">
-                <img src="https://img.gqkorea.co.kr/gq/2022/05/style_6295b5e2644b8.jpg"
+                <img src="https://img.gqkorea.co.kr/gq/2022/05/style_6295b63c965b3.jpg"
                      class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">진우길</h5>
@@ -185,6 +193,14 @@
         </div>
     </div>
 </div>
+<footer class="bg-light text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.1);">
+    © 2022 Group4 진우,승열,채운,수민
+    <a class="text-dark" href="https://hanghae99.spartacodingclub.kr/">hanghae99</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 </body>
 </html>
 
