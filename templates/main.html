@@ -108,6 +108,7 @@
                 data: {},
                 success: function (response) {
                     let rows = response['review']
+
                     for (let i = 0; i < rows.length; i++) {
                         let post_id = rows[i]['post_id']
                         let title = rows[i]['title']
@@ -156,7 +157,7 @@
 </header>
 <div class="button">
     <button type="button" class="btn btn-danger">
-        <a href="/api/walk">내길 자랑하러가기</a>
+        <a href="/index_cw">내길 자랑하러가기</a>
     </button>
 </div>
 <div class="mycards">
