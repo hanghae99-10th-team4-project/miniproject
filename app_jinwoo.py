@@ -50,7 +50,7 @@ def login():
 
 @app.route('/api/main')
 def main():
-    return render_template('main.html')
+    return render_template('index.html')
 
 @app.route('/signup')
 def register():
