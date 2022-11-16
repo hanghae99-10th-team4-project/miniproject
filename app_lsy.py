@@ -134,6 +134,7 @@ def comment_post():
     post_id_receive = request.form['post_id']
     comment_receive = request.form['comment_give']
     star_receive = request.form['star']
+    post_id_int = int(post_id_receive)
 
     comment_list = list(db.walk_comment.find({},{'_id': False}))
     count = len(comment_list) + 1
@@ -145,7 +146,7 @@ def comment_post():
     user_id_receive = user_info['user_id']
 
     doc = {
-        'post_id': post_id_receive,
+        'post_id': post_id_int,
         'user_id': user_id_receive,
         'comment_id': count,
         'comment': comment_receive,
@@ -154,6 +155,16 @@ def comment_post():
 
     db.walk_comment.insert_one(doc)
     return jsonify({'msg': '등록완료'})
+
+ #글 삭제하기
+@app.route("/api/walk/comment/delete", methods=["POST"])
+def post_delete():
+    post_id_receive = request.form['post_id_give']
+    post_id_int = int(post_id_receive)
+    db.walk.delete_one({'post_id': post_id_int})
+    db.walk_comment.delete_many({'post_id': post_id_int})
+
+    return jsonify({'msg': '삭제완료'})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

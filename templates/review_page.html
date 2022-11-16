@@ -133,13 +133,14 @@
 <script>
     let post_id_receive = sessionStorage.getItem("post_id")
     let user_id_ckd = sessionStorage.getItem("user_id_ckd")
+
     console.log(post_id_receive)
     $(document).ready(function () {
         show_review();
         show_comment();
         set_user();
     })
-
+// 로그인한 아이디 표시하기&아이디 값 저장
     function set_user() {
         $.ajax({
             type: 'GET',
@@ -153,12 +154,13 @@
             }
         })
     }
-
+// 로그아웃 버튼
     function logout() {
         $.removeCookie('mytoken', {path: '/api'});
         alert('로그아웃!')
         window.location.href = '/api/member'
     }
+// 포스팅 글 불러오기 & 본인 작성 글일 때 수정, 제거 버튼 생성
     function show_review() {
         $.ajax({
             type: 'GET',
@@ -203,7 +205,7 @@
             }
         })
     }
-
+// 저장된 댓글 불러오기
     function show_comment() {
         $('#saved_comment').empty()
         $.ajax({
@@ -234,7 +236,7 @@
             }
         })
     }
-
+// 댓글 저장하기
     function save_comment() {
         let comment = $('#comment').val()
         let post_id = post_id_receive
@@ -255,13 +257,22 @@
             })
         }
     }
-
+//
     function update_btn() {
 
     }
-
+// 작성자 포스팅 글 삭제
     function delete_btn() {
-
+        let post_id = post_id_receive
+        $.ajax({
+            type: "POST",
+            url: "/api/walk/comment/delete",
+            data: {post_id_give: post_id},
+            success: function (response) {
+                alert(response["msg"])
+                location.href = '/api/main';
+            }
+        })
     }
 
 </script>
