@@ -56,7 +56,9 @@
         padding-top: 0.5%;
 
     }
-
+    .logout:hover {
+        color: #bab9b9;
+    }
     .cover {
         display: flex;
         flex-direction: column;
@@ -71,6 +73,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        padding: 300px;
 
     }
 
@@ -109,7 +113,7 @@
     let post_id_receive = sessionStorage.getItem("post_id")
     console.log(post_id_receive)
     $(document).ready(function () {
-        /* show_review(); */
+       /* show_review(); */
         show_comment();
         set_user();
     })
@@ -136,12 +140,12 @@
     }
     function show_review() {
         $('#review').empty()
-        console.log(user_id_ckd)
         $.ajax({
             type: "GET",
             url: "/api/walk",
             data: {},
             success: function (response) {
+                console.log(user_id_ckd)
                 let rows = response['review']
 
                 for( i=0; i < rows.length; i++) {
@@ -153,7 +157,7 @@
                     category = rows[i]['category']
 
 
-                    if(post_id == post_id_receive) {
+                   /* if(post_id == post_id_receive) {
                         let temp_html = `<div class="card" style="width: 50rem;">
                                             <div class="card-header">
                                                 제목  ${title}
@@ -172,7 +176,7 @@
                                               <button onclick="delete_btn()">삭제</button>`
                             $('#edit_btn').append(temp_html2)
                         }
-                    }
+                    }*/
                 }
             }
         })
@@ -194,7 +198,7 @@
                     let comment = rows[i]['comment']
                     let star = rows[i]['star']
                     let star_image = '⭐'.repeat(star)
-
+                    console.log(post_id)
                     if (post_id == post_id_receive) {
                         let temp_html = `<div id="saved_comment" class="card" style="width: 50rem;">
                                             <div class="card-header">${user_id} ${star_image}</div>
@@ -287,6 +291,11 @@
         <button onclick="save_comment()" type="button" class="btn btn-outline-primary">등록</button>
     </div>
 </div>
-
+<footer class="bg-light text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.1);">
+    © 2022 Group4 진우,승열,채운,수민
+    <a class="text-dark" href="https://hanghae99.spartacodingclub.kr/">hanghae99</a>
+  </div>
 </body>
 </html>
