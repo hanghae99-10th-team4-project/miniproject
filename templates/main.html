@@ -121,11 +121,11 @@
                         let post_id = rows[i]['post_id']
                         let title = rows[i]['title']
                         let category = rows[i]['category']
-                        let img = rows[i]['img']
+                        let img = rows[i]['image']
 
                         let temp_html = `<div class="col" onclick="show_review(${post_id})">
                                             <div class="card h-100">
-                                                <img src="${img}"
+                                                <img src="../static/${img}"
                                                 class="card-img-top">
                                                 <div class="card-body">
                                                 <h5 class="card-title">${title}</h5>

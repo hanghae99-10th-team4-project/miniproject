@@ -143,16 +143,32 @@
     </style>
 
      <script>
-
          function save_comment() {
+
+             let title = $('#title').val()
+             let review = $('#review').val()
+             let category = $('#category').val()
+             let file = $('#file')[0].files[0]
+             let form_data = new FormData()
+             console.log($('#file')[0].files[0])
+
+
+             form_data.append("title_give", title)
+             form_data.append("review_give", review)
+             form_data.append("file_give", file)
+             form_data.append("category_give", category)
 
             $.ajax({
                 type: "POST",
                 url: "/api/walk",
-                data: {'title_give':$('#title').val(), 'review_give':$('#review').val(), 'image_give':$('#image').val(), 'category_give':$('#category').val()},
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+
                 success: function (response) {
                     alert(response["msg"])
-                    window.location.href="/api/main"
+                    window.location.href = '/api/main'
                 }
             })
         }
@@ -176,13 +192,10 @@
         <form class="form-input">
             <input class="title-input" placeholder="나만의 길이름을 적어보자!" id="title">
             <input class="review-input" placeholder="나만의 산책길을 뽐내주세요!" id="review">
-            <!--            <textarea placeholder="내용"></textarea>-->
-            <!--textarea
-                <div class="mb-3" >-->
-            <!--                <label for="image" class="image-input" id="image">이미지 첨부</label>-->
-            <!--                <input class="form-control" type="file" id="image" multiple>-->
-            <!--            </div>-->
-            <input type="file" class="image-input" accept="jpg, jpeg, png" id="image"/>
+            <div class="custom-file">
+                <input type="file" class="file-input" id="file">
+                <label class="custom-file-label" for="file"></label>
+            </div>
             <div>
                 <select class="category-select" aria-label="category" id="category">
                     <option selected>카테고리를 선택해주세요.</option>
