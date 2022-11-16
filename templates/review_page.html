@@ -74,12 +74,16 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        padding: 300px;
+        padding: 20px 300px 300px 300px;
 
     }
 
+    .review_site{
+        margin-bottom: 50px;
+    }
+
     .card {
-        margin-top: 50px;
+        margin-top: 10px;
     }
 
     .edit_btn {
@@ -111,9 +115,10 @@
 </style>
 <script>
     let post_id_receive = sessionStorage.getItem("post_id")
+    let user_id_ckd = sessionStorage.getItem("user_id_ckd")
     console.log(post_id_receive)
     $(document).ready(function () {
-       /* show_review(); */
+        show_review();
         show_comment();
         set_user();
     })
@@ -127,9 +132,8 @@
                 $('#userId').text(response['setUser'])
 
                 user_id = response['setUser']
-
+                sessionStorage.setItem("user_id_ckd", user_id);
             }
-
         })
     }
 
@@ -139,25 +143,25 @@
         window.location.href = '/api/member'
     }
     function show_review() {
-        $('#review').empty()
         $.ajax({
-            type: "GET",
-            url: "/api/walk",
+            type: 'GET',
+            url: '/api/walk',
             data: {},
             success: function (response) {
-                console.log(user_id_ckd)
+                console.log(response['review'])
                 let rows = response['review']
 
-                for( i=0; i < rows.length; i++) {
-                    post_id = rows[i]['post_id']
-                    user_id = rows[i]['user_id']
-                    title = rows[i]['title']
-                    review = rows[i]['review']
-                    img = rows[i]['img']
-                    category = rows[i]['category']
+                for( let i=0; i < rows.length; i++) {
+                    let post_id = rows[i]['post_id']
+                    let user_id = rows[i]['user_id']
+                    let title = rows[i]['title']
+                    let review = rows[i]['review']
+                    let img = rows[i]['image']
+                    let category = rows[i]['category']
 
 
-                   /* if(post_id == post_id_receive) {
+                    if(post_id == post_id_receive) {
+                        console.log(title)
                         let temp_html = `<div class="card" style="width: 50rem;">
                                             <div class="card-header">
                                                 제목  ${title}
@@ -167,16 +171,17 @@
                                                 <li class="list-group-item">설명
                                                 <p>${review}</p>
                                                 </li>
+                                                <li class="list-group-item">작성자 ${user_id}</li>
                                             </ul>
                                         </div>`
-                        $('#review').append(temp_html)
+                        $('#review_site').append(temp_html)
 
                         if(user_id == user_id_ckd) {
                             let temp_html2 = `<button onclick="update_btn()">수정</button>
                                               <button onclick="delete_btn()">삭제</button>`
                             $('#edit_btn').append(temp_html2)
                         }
-                    }*/
+                    }
                 }
             }
         })
@@ -198,7 +203,7 @@
                     let comment = rows[i]['comment']
                     let star = rows[i]['star']
                     let star_image = '⭐'.repeat(star)
-                    console.log(post_id)
+
                     if (post_id == post_id_receive) {
                         let temp_html = `<div id="saved_comment" class="card" style="width: 50rem;">
                                             <div class="card-header">${user_id} ${star_image}</div>
@@ -254,24 +259,15 @@
         <h6> 나만의 동네산책길을 공유하세요</h6>
     </div>
 </header>
-<div id="review" class="review">
-    <div class="card" style="width: 50rem;">
-        <div class="card-header">
-            제목
-        </div>
-        <ul class="list-group list-group-flush">
-            <img class="list-group-item" src="..." alt="리뷰이미지"></img>
-            <li class="list-group-item">설명
-                <p>여기에 내용이 들어갑니다</p>
-            </li>
-        </ul>
+<div class="review">
+    <div id="review_site" class="review_site">
     </div>
+
     <div id="saved_comment" style="width: 50rem;">
 
     </div>
     <div id="edit_btn" class="edit_btn">
-        <button onclick="update_btn()">수정</button>
-        <button onclick="delete_btn()">삭제</button>
+
     </div>
     <div class="star_box">
         <div class="input-group mb-3">
