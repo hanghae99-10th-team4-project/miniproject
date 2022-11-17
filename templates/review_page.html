@@ -122,10 +122,14 @@
     .comment_input {
         margin-top: 5px;
         width: 50rem;
+
     }
 
     .comment_input > button {
         margin-top: 10px;
+        position: relative;
+        bottom: 0px;
+        left: 750px;
 
     }
 
@@ -196,7 +200,7 @@
                         $('#review_site').append(temp_html)
 
                         if(user_id == user_id_ckd) {
-                            let temp_html2 = `<button onclick="delete_btn()">삭제</button>`
+                            let temp_html2 = `<button onclick="delete_btn() "type="button" class="btn btn-outline-primary">삭제</button>`
                             $('#edit_btn').append(temp_html2)
                         }
                     }
