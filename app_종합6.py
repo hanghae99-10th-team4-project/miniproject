@@ -136,7 +136,7 @@ def posting():
     title_receive = request.form['title_give']
     review_receive = request.form['review_give']
     category_receive = request.form['category_give']
-
+    print(review_receive)
     token_receive = request.cookies.get('mytoken')
 
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -154,6 +154,7 @@ def posting():
 
 
     post_list = list(db.walk.find({},{'_id': False}))
+    count = 0
     for post_doc in post_list:
         count = post_doc['post_id']+1
 
@@ -193,6 +194,7 @@ def comment_post():
     star_receive = request.form['star']
 
     comment_list = list(db.walk_comment.find({},{'_id': False}))
+    count = 0
     for comment_doc in comment_list:
         count = comment_doc['comment_id'] + 1
 
