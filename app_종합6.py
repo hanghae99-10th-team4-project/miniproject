@@ -203,7 +203,7 @@ def comment_post():
     user_id_receive = user_info['user_id']
 
     doc = {
-        'post_id': post_id_receive,
+        'post_id': int(post_id_receive),
         'user_id': user_id_receive,
         'comment_id': count,
         'comment': comment_receive,
