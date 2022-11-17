@@ -99,6 +99,10 @@
         margin-bottom: 50px;
     }
 
+    .input-review {
+        white-space: pre-line;
+    }
+
     .card {
         margin-top: 10px;
     }
@@ -192,7 +196,7 @@
                                             <ul class="list-group list-group-flush">
                                                 <img class="list-group-item" src="../static/${img}" alt="리뷰이미지"></img>
                                                 <li class="list-group-item">설명
-                                                <p>${review}</p>
+                                                <p class="input-review" >${review}</p>
                                                 </li>
                                                 <li class="list-group-item">작성자 ${user_id}</li>
                                             </ul>
