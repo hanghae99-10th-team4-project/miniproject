@@ -143,20 +143,46 @@
     </style>
 
      <script>
-         function save_comment() {
 
-             let title = $('#title').val()
-             let review = $('#review').val()
-             let category = $('#category').val()
-             let file = $('#file')[0].files[0]
-             let form_data = new FormData()
-             console.log($('#file')[0].files[0])
+         let user_id='';
+        $(document).ready(function () {
+            set_user();
+        });
+
+         // 로그인한 아이디 표시하기&아이디 값 저장
+        function set_user() {
+            $.ajax({
+                type: 'GET',
+                url: '/api/member/setuser',
+                data: {},
+                success: function (response) {
+                    $('#userId').text(response['setUser'])
+
+                    user_id=response['setUser']
+                }
+            })
+        }
+// 로그아웃 버튼
+    function logout() {
+        $.removeCookie('mytoken', {path: '/api'});
+        alert('로그아웃!')
+        window.location.href = '/api/member'
+    }
+
+        function save_comment() {
+
+            let title = $('#title').val()
+            let review = $('#review').val()
+            let category = $('#category').val()
+            let file = $('#file')[0].files[0]
+            let form_data = new FormData()
+            console.log($('#file')[0].files[0])
 
 
-             form_data.append("title_give", title)
-             form_data.append("review_give", review)
-             form_data.append("file_give", file)
-             form_data.append("category_give", category)
+            form_data.append("title_give", title)
+            form_data.append("review_give", review)
+            form_data.append("file_give", file)
+            form_data.append("category_give", category)
 
             $.ajax({
                 type: "POST",
