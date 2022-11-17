@@ -186,7 +186,7 @@
                                                 제목  ${title}
                                             </div>
                                             <ul class="list-group list-group-flush">
-                                                <img class="list-group-item" src="${img}" alt="리뷰이미지"></img>
+                                                <img class="list-group-item" src="../static/${img}" alt="리뷰이미지"></img>
                                                 <li class="list-group-item">설명
                                                 <p>${review}</p>
                                                 </li>
@@ -196,8 +196,7 @@
                         $('#review_site').append(temp_html)
 
                         if(user_id == user_id_ckd) {
-                            let temp_html2 = `<button onclick="update_btn()">수정</button>
-                                              <button onclick="delete_btn()">삭제</button>`
+                            let temp_html2 = `<button onclick="delete_btn()">삭제</button>`
                             $('#edit_btn').append(temp_html2)
                         }
                     }
